@@ -1,3 +1,4 @@
+
 const path = require('path');
 const fs = require('fs');
 const readline = require('readline');
@@ -7,7 +8,7 @@ const firstLine = async (pathToFile) => {
   const reader = readline.createInterface({ input: readable });
 
   const line = await new Promise((resolve) => {
-    reader.on('line', (line) => {
+    reader.on('line', line => {
       reader.close();
       resolve(line);
     });
@@ -18,23 +19,23 @@ const firstLine = async (pathToFile) => {
   return line;
 }
 
-let failed = false;
+let failed = false
 
-const traverse = async (startPath, filter) => {
-    if (!fs.existsSync(startPath)) {
+const traverse = async (basePath, filter) => {
+    if (!fs.existsSync(basePath)) {
         return;
     }
 
-    var files = fs.readdirSync(startPath);
+    var files = fs.readdirSync(basePath);
     for (var i = 0; i < files.length; i++) {
-        var filename = path.join(startPath, files[i]);
-        var stat = fs.lstatSync(filename);
+        var filePath = path.join(basePath, files[i]);
+        var stat = fs.lstatSync(filePath);
         if (stat.isDirectory()) {
-            await traverse(filename, filter);
-        } else if (filename.indexOf(filter) >= 0) {
-            if (!(await firstLine(filename)).startsWith('//')) {
+            await traverse(filePath, filter);
+        } else if (filePath.endsWith(filter)) {
+            if (!(await firstLine(filePath)).startsWith('//')) {
                 failed = true;
-                console.log(filename);
+                console.log(filePath);
             }
         }
     }
@@ -49,4 +50,3 @@ const test = async () => {
 }
 
 test();
-
