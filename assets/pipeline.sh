@@ -18,7 +18,7 @@ echo "Build done"
 echo
 
 echo "Running npm run test.."
-npm run test
+CI=true npm test
 echo "Tests done"
 echo
 
