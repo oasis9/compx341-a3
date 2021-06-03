@@ -50,8 +50,8 @@ git add .
 check "Staging failed."
 
 echo "Committing.."
-echo "$1"
-git commit -m "$1"
+echo "${COMMENT}"
+git commit -m "${COMMENT}"
 check "Commit failed."
 echo "Committed."
 echo
