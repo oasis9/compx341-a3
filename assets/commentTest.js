@@ -21,32 +21,36 @@ const firstLine = async (pathToFile) => {
 
 let failed = false
 
-const traverse = async (basePath, filter) => {
-    if (!fs.existsSync(basePath)) {
-        return;
-    }
+const traverse = async (basePath, filters) => {
+  if (!fs.existsSync(basePath)) {
+    return;
+  }
 
-    var files = fs.readdirSync(basePath);
-    for (var i = 0; i < files.length; i++) {
-        var filePath = path.join(basePath, files[i]);
-        var stat = fs.lstatSync(filePath);
-        if (stat.isDirectory()) {
-            await traverse(filePath, filter);
-        } else if (filePath.endsWith(filter)) {
-            if (!(await firstLine(filePath)).startsWith('//')) {
-                failed = true;
-                console.log(filePath);
-            }
+  var files = fs.readdirSync(basePath);
+  for (var i = 0; i < files.length; i++) {
+    var filePath = path.join(basePath, files[i]);
+    var stat = fs.lstatSync(filePath);
+    if (stat.isDirectory()) {
+      await traverse(filePath, filters);
+    } else {
+      for (let filter of filters) {
+        if (filePath.endsWith(filter)) {
+          if (!(await firstLine(filePath)).startsWith('// ')) {
+            failed = true;
+            console.log(filePath);
+          }
         }
+      }
     }
+  }
 }
 
 const timeout = setTimeout(() => {}, 9999999);
 
 const test = async () => {
-    await traverse('src', '.ts');
+  await traverse('src', [ '.ts', '.tsx' ]);
 
-    process.exit(failed? 1 : 0);
+  process.exit(failed? 1 : 0);
 }
 
 test();

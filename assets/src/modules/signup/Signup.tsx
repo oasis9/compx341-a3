@@ -1,3 +1,4 @@
+// Oasis Sharp | 1502106
 import { Auth } from "aws-amplify";
 import React from "react";
 import { Redirect } from 'react-router';

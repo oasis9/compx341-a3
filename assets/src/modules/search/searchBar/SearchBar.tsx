@@ -1,3 +1,4 @@
+// Oasis Sharp | 1502106
 import React from "react";
 import "./searchBar.css";
 import { Redirect } from "react-router";

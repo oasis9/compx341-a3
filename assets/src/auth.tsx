@@ -1,3 +1,4 @@
+// Oasis Sharp | 1502106
 import Amplify from "aws-amplify";
 import config from "./config";
 

@@ -1,3 +1,4 @@
+// Oasis Sharp | 1502106
 import React from "react";
 import "../../common/styles/gallery.css";
 import StarRating from "../../common/starRating/StarRating";
