@@ -9,6 +9,10 @@ import renderer from 'react-test-renderer';
 afterEach(cleanup);
 
 it('renders without crashing', () => {
+  render(<BestSellers />);
+});
+
+it('renders the correct title', () => {
   window.alert = jest.fn();
   const { getByTestId } = render(<BestSellers />);
   expect(getByTestId('title').innerHTML).toEqual('Top 20 best sellers');

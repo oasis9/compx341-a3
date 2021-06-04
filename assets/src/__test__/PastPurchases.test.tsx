@@ -10,6 +10,10 @@ import "../auth";
 afterEach(cleanup);
 
 it('renders without crashing', () => {
+  render(<PastPurchases />);
+});
+
+it('renders the correct title', () => {
   window.alert = jest.fn();
   const { getByTestId } = render(<PastPurchases />);
   expect(getByTestId('title').innerHTML).toEqual('Past purchases');
