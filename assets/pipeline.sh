@@ -22,8 +22,8 @@ check "Please provide a commit message."
 
 echo "Checking for comments.."
 node commentTest.js
-check "The above files don't have an author comment."
-echo "All .ts files have an author comment."
+check "The above files don't have an top-of-file comment."
+echo "All .ts and .tsx files have a top-of-file comment."
 echo
 
 echo "Running npm install.."

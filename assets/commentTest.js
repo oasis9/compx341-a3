@@ -1,4 +1,3 @@
-
 const path = require('path');
 const fs = require('fs');
 const readline = require('readline');
@@ -26,10 +25,10 @@ const traverse = async (basePath, filters) => {
     return;
   }
 
-  var files = fs.readdirSync(basePath);
-  for (var i = 0; i < files.length; i++) {
-    var filePath = path.join(basePath, files[i]);
-    var stat = fs.lstatSync(filePath);
+  let files = fs.readdirSync(basePath);
+  for (let i = 0; i < files.length; i++) {
+    let filePath = path.join(basePath, files[i]);
+    let stat = fs.lstatSync(filePath);
     if (stat.isDirectory()) {
       await traverse(filePath, filters);
     } else {
