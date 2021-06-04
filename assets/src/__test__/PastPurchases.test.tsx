@@ -10,7 +10,9 @@ import "../auth";
 afterEach(cleanup);
 
 it('renders without crashing', () => {
+  window.alert = jest.fn();
   render(<PastPurchases />);
+  window.alert.mockClear();
 });
 
 it('renders the correct title', () => {

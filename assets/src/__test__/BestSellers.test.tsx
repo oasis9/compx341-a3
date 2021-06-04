@@ -9,7 +9,9 @@ import renderer from 'react-test-renderer';
 afterEach(cleanup);
 
 it('renders without crashing', () => {
+  window.alert = jest.fn();
   render(<BestSellers />);
+  window.alert.mockClear();
 });
 
 it('renders the correct title', () => {
